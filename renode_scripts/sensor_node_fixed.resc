@@ -4,7 +4,6 @@ using sysbus
 mach create "sensor-node"
 machine LoadPlatformDescription @/opt/renode/platforms/boards/stm32f4_discovery.repl
 
-# PTY approach that WAS WORKING (showed XRCE messages)
 emulation CreateUartPtyTerminal "sensor-pty" "/tmp/sensor_uart" true
 connector Connect sysbus.usart2 sensor-pty
 

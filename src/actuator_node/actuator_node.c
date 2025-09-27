@@ -8,7 +8,7 @@
 
 #include "rmw_microros/rmw_microros.h"
 
-#define THRESHOLD 25  // Temperature threshold
+#define THRESHOLD 25  
 
 rcl_subscription_t subscriber;
 std_msgs__msg__Int32 msg;
@@ -19,11 +19,11 @@ void subscription_callback(const void *msgin) {
     printf("Actuator received temperature: %d°C\n", msg->data);
     
     if (msg->data > THRESHOLD) {
-        printf("🚨 TEMPERATURE TOO HIGH! Activating cooler...\n");
-        // Simulate actuator response
-        printf("✅ Cooler activated for 3 seconds\n");
+        printf(" TEMPERATURE TOO HIGH! Activating cooler...\n");
+        
+        printf(" Cooler activated for 3 seconds\n");
     } else {
-        printf("✅ Temperature normal. No action needed.\n");
+        printf(" Temperature normal. No action needed.\n");
     }
 }
 
@@ -32,7 +32,6 @@ int main() {
     rclc_support_t support;
     rcl_node_t node;
 
-    // Initialize micro-ROS
     rmw_uros_set_custom_transport(
         false, NULL,
         rmw_uros_serial_transport_open,
@@ -44,7 +43,6 @@ int main() {
     rclc_support_init(&support, 0, NULL, &allocator);
     rclc_node_init_default(&node, "actuator_node", "", &support);
 
-    // Create subscriber for temperature data
     rclc_subscription_init_default(
         &subscriber,
         &node,

@@ -14,9 +14,8 @@ std_msgs__msg__Int32 msg;
 void timer_callback(rcl_timer_t *timer, int64_t last_call_time) {
     (void) last_call_time;
     if (timer != NULL) {
-        // Simulate sensor reading (temperature 20-30°C)
         static int temperature = 20;
-        temperature = 20 + (rand() % 11); // Random between 20-30
+        temperature = 20 + (rand() % 11); 
         
         msg.data = temperature;
         printf("Sensor publishing temperature: %d°C\n", temperature);
@@ -30,7 +29,6 @@ int main() {
     rcl_node_t node;
     rcl_timer_t timer;
 
-    // Initialize micro-ROS
     rmw_uros_set_custom_transport(
         false, NULL,
         rmw_uros_serial_transport_open,
@@ -42,7 +40,6 @@ int main() {
     rclc_support_init(&support, 0, NULL, &allocator);
     rclc_node_init_default(&node, "sensor_node", "", &support);
 
-    // Create publisher for temperature data
     rclc_publisher_init_default(
         &publisher,
         &node,
@@ -50,7 +47,6 @@ int main() {
         "temperature"
     );
 
-    // Create timer to publish every 2 seconds
     rclc_timer_init_default(
         &timer,
         &support,

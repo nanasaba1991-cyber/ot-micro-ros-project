@@ -4,7 +4,6 @@ using sysbus
 mach create "actuator-node"
 machine LoadPlatformDescription @/opt/renode/platforms/boards/stm32f4_discovery.repl
 
-# PTY approach
 emulation CreateUartPtyTerminal "actuator-pty" "/tmp/actuator_uart" true
 connector Connect sysbus.usart3 actuator-pty
 
