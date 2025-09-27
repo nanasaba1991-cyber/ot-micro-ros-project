@@ -1,4 +1,3 @@
-#!/bin/bash
 echo "Building micro-ROS firmware..."
 
 cd ~/micro_ros_ws

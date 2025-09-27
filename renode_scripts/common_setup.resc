@@ -1,0 +1,27 @@
+# Common Setup for STM32F4 Nodes
+# This file contains shared configuration for all STM32F4 nodes
+
+using sysbus
+
+# Common STM32F4 Discovery board configuration
+$ORIGIN_BOARD_PATH="/opt/renode/platforms/boards/stm32f4_discovery.repl"
+
+# Common memory mappings
+$FLASH_ORIGIN=0x08000000
+$FLASH_SIZE=0x00100000
+$RAM_ORIGIN=0x20000000  
+$RAM_SIZE=0x00020000
+
+# Common UART configuration
+$BAUDRATE=115200
+$DATA_BITS=8
+$STOP_BITS=1
+$PARITY_BITS=0
+
+# Common clock configuration
+$SYSTEM_CLOCK=168000000
+$HCLK=168000000
+$PCLK1=42000000
+$PCLK2=84000000
+
+echo "Common STM32F4 configuration loaded"

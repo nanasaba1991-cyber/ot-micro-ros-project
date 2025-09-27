@@ -1,11 +1,10 @@
-#!/bin/bash
-echo "🔍 Verifying Project Structure..."
+echo " Verifying Project Structure..."
 
 check_file() {
     if [ -f "$1" ]; then
-        echo "✅ $1"
+        echo " $1"
     else
-        echo "❌ $1 - MISSING"
+        echo " $1 - MISSING"
     fi
 }
 
