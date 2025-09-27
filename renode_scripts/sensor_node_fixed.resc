@@ -1,0 +1,16 @@
+# Sensor Node - STM32F4
+using sysbus
+
+mach create "sensor-node"
+machine LoadPlatformDescription @/opt/renode/platforms/boards/stm32f4_discovery.repl
+
+# PTY approach that WAS WORKING (showed XRCE messages)
+emulation CreateUartPtyTerminal "sensor-pty" "/tmp/sensor_uart" true
+connector Connect sysbus.usart2 sensor-pty
+
+showAnalyzer usart2
+
+sysbus LoadELF @/home/nasrin/micro_ros_ws/firmware/freertos_apps/microros_nucleo_f446re_extensions/build/micro-ROS.elf
+sysbus.cpu VectorTableOffset 0x08000000
+
+echo "Sensor node ready - PTY: /tmp/sensor_uart"

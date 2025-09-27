@@ -1,0 +1,16 @@
+# Actuator Node - STM32F4
+using sysbus
+
+mach create "actuator-node"
+machine LoadPlatformDescription @/opt/renode/platforms/boards/stm32f4_discovery.repl
+
+# PTY approach
+emulation CreateUartPtyTerminal "actuator-pty" "/tmp/actuator_uart" true
+connector Connect sysbus.usart3 actuator-pty
+
+showAnalyzer usart3
+
+sysbus LoadELF @/home/nasrin/micro_ros_ws/firmware/freertos_apps/microros_nucleo_f446re_extensions/build/micro-ROS.elf
+sysbus.cpu VectorTableOffset 0x08000000
+
+echo "Actuator node ready - PTY: /tmp/actuator_uart"
