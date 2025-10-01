@@ -1,7 +1,12 @@
+#!/bin/bash
 echo "Building micro-ROS firmware..."
 
-cd ~/micro_ros_ws
-colcon build --packages-select microros_nucleo_f446re_extensions
+# Source micro-ROS setup
+source ~/micro_ros_ws/install/setup.bash
+
+# Use micro_ros_setup tools CORRECTLY
+ros2 run micro_ros_setup create_firmware_ws.sh freertos nucleo_f446re
+ros2 run micro_ros_setup build_firmware.sh
 
 echo "Build complete! Firmware located at:"
-echo "firmware/freertos_apps/microros_nucleo_f446re_extensions/build/micro-ROS.elf"
+find ~/micro_ros_ws -name "micro-ROS.elf" -type f 2>/dev/null
